@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, Pressable } from 'react-native';
 import FloatingLabelInput from "./FloatingLabelInput";
 
 export default function LoginScreen({ navigation }: any) {
 
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
 
     return (
@@ -16,6 +17,18 @@ export default function LoginScreen({ navigation }: any) {
                 value={email}
                 onChangeText={setEmail}
             />
+
+            <FloatingLabelInput
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={true}
+            />
+
+            <Pressable style={styles.button}>
+                <Text style={styles.buttonText}>Log in</Text>
+            </Pressable>
+
         </View>
     );
 }
@@ -24,27 +37,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#FDF1C3",
-        alignItems: "flex-start",
-        justifyContent: "flex-start",
-        padding: 20,
+        padding: 25,
     },
     title: {
         fontSize: 32,
         marginBottom: 40,
         color: "#25450D",
         fontWeight: "bold",
+        alignContent: "center"
+
     },
     button: {
-        width: "100%",
-        backgroundColor: "#3A7E1F",
-        paddingVertical: 14,
-        borderRadius: 10,
-        alignItems: "center",
-        marginTop: 10,
+        backgroundColor: "#0A0A0A",
+        padding: 18,
+        borderRadius: 100,
     },
     buttonText: {
-        color: "white",
-        fontSize: 18,
-        fontWeight: "bold",
-    },
+        color: "#FDF1C3",
+    }
 });

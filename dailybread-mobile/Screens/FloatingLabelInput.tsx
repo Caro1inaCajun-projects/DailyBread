@@ -43,7 +43,7 @@ export default function FloatingLabelInput({
     };
 
     return (
-        <View style={styles.input}>
+        <View style={styles.contain}>
             <Animated.Text style={labelStyle}>{placeholder}</Animated.Text>
             <TextInput
                 style={styles.input}
@@ -62,7 +62,8 @@ export default function FloatingLabelInput({
 
 const styles = StyleSheet.create({
     contain: {
-
+        width: "100%",
+        paddingVertical: 10,
     },
     input: {
         width: "100%",
@@ -71,7 +72,6 @@ const styles = StyleSheet.create({
         marginBottom: 24,
         paddingVertical: 10,
         fontSize: 16,
-        color: "#000",
     },
 
 });
