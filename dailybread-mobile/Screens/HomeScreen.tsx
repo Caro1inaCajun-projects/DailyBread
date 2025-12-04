@@ -13,9 +13,7 @@ export default function HomeScreen({ navigation }: any) {
                 keyExtractor={(item: Habit) => item.id.toString()}
                 renderItem={({ item }) => (
                     <View style={styles.habitItem}>
-                        <Text style={[styles.habitName, { color: colors[item.category.toLowerCase()] || colors.textDark }]}>
-                            {item.name} {item.completed ? 'Yes' : 'No'}
-                        </Text>
+
                         <Text style={styles.category}>{item.category}</Text>
                     </View>
                 )}
