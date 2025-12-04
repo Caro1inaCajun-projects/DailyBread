@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import FloatingLabelInput from "./FloatingLabelInput";
 
 export default function LoginScreen({ navigation }: any) {
@@ -21,6 +21,8 @@ export default function LoginScreen({ navigation }: any) {
             <Pressable style={styles.signUpButton} onPress={handleSignUp}>
                 <Text style={styles.signUpButtonText }>Sign Up</Text>
             </Pressable>
+            <Image source={require("../assets/daily-bread-logo.png")} style={styles.logo} />
+
             <Text style={styles.title}>Log in</Text>
 
             <FloatingLabelInput
@@ -52,7 +54,7 @@ export default function LoginScreen({ navigation }: any) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FDF1C3",
+        backgroundColor: "#EFE3C6",
         padding: 25,
     },
     title: {
@@ -62,6 +64,12 @@ const styles = StyleSheet.create({
         color: "#2E7D32",
         fontWeight: "bold",
 
+    },
+    logo: {
+        width: 200,
+        height: 200,
+        resizeMode: "contain",
+        alignSelf: "center",
     },
     logInButton: {
         marginTop: 15,
@@ -74,7 +82,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         fontSize: 15,
         fontWeight: "bold",
-        color: "#FDF1C3",
+        color: "#EFE3C6",
     },
     signUpButton: {
         marginTop: 25,
