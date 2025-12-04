@@ -16,6 +16,7 @@ export default function FloatingLabelInput({
     value,
     onChangeText,
     secureTextEntry,
+
 }: FloatingLabelInputProps) {
     const [isFocused, setIsFocused] = useState(false);
     const animatedIsFocused = useRef(new Animated.Value(value ? 1 : 0)).current;
@@ -39,7 +40,7 @@ export default function FloatingLabelInput({
             inputRange: [0, 1],
             outputRange: [18, 14], // smaller font when floating
         }),
-        color: "#3A7E1F",
+        color: "#878472",
     };
 
     return (

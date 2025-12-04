@@ -2,32 +2,38 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import FloatingLabelInput from "./FloatingLabelInput";
 
-export default function LoginScreen({ navigation }: any) {
+
+export default function SignUpScreen({ navigation }: any) {
 
     const [email, setEmail] = useState("");
+    const [name, setName] =useState("")
     const [password, setPassword] = useState("");
 
-    const handleLogIn = () => {
+    const handleSignUp = () => {
         navigation.replace("MainTabs");
     }
 
-    const handleSignUp = () => {
-        navigation.replace("SignUp")
+    const handleLogIn = () => {
+        navigation.replace("Login")
     }
-
 
     return (
         <View style={styles.container}>
-            <Pressable style={styles.signUpButton} onPress={handleSignUp}>
-                <Text style={styles.signUpButtonText }>Sign Up</Text>
+            <Pressable style={styles.logInButton} onPress={handleLogIn}>
+                <Text style={styles.logInButtonText}>Log in</Text>
             </Pressable>
-            <Text style={styles.title}>Log in</Text>
+            <Text style={styles.title}>Sign Up</Text>
 
             <FloatingLabelInput
                 placeholder="Email"
                 value={email}
                 onChangeText={setEmail}
+            />
 
+            <FloatingLabelInput
+                placeholder="Name"
+                value={name}
+                onChangeText={setName}
             />
 
             <FloatingLabelInput
@@ -37,16 +43,15 @@ export default function LoginScreen({ navigation }: any) {
                 secureTextEntry={true}
             />
 
-            <Pressable style={styles.logInButton} onPress={handleLogIn}>
-                <Text style={styles.logInButtonText}>Log in</Text>
+            <Pressable style={styles.signUpButton} onPress={handleSignUp}>
+                <Text style={styles.signUpButtonText}>Sign Up</Text>
             </Pressable>
 
-            <Pressable style={styles.forgotPassButton}>
-                <Text style={styles.forgotPassButtonText}>Forgot Password?</Text>
-            </Pressable>
 
         </View>
     );
+
+
 }
 
 const styles = StyleSheet.create({
@@ -63,33 +68,28 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
 
     },
-    logInButton: {
+    signUpButton: {
         marginTop: 15,
         backgroundColor: "#2E7D32",
         padding: 18,
         borderRadius: 100,
     },
-    logInButtonText: {
+    signUpButtonText: {
         textAlign: "center",
         justifyContent: "center",
         fontSize: 15,
         fontWeight: "bold",
         color: "#FDF1C3",
     },
-    signUpButton: {
+    logInButton: {
         marginTop: 25,
         alignSelf: 'flex-end',
         justifyContent: 'flex-end'
 
     },
-    signUpButtonText: {
+    logInButtonText: {
         color: "#878472"
     },
-    forgotPassButton: {
-        alignSelf: 'center',
-        marginTop: 15
-    },
-    forgotPassButtonText: {
-        color: '#878472'
-    }
+
 });
+
