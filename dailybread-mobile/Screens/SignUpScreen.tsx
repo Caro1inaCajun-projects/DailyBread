@@ -9,9 +9,33 @@ export default function SignUpScreen({ navigation }: any) {
     const [name, setName] =useState("")
     const [password, setPassword] = useState("");
 
-    const handleSignUp = () => {
-        navigation.replace("MainTabs");
-    }
+    const handleSignUp = async () => {
+        const user = {
+            email: email,
+            password: password,
+            userName: name,
+        };
+
+        try {
+            const response = await fetch("http://172.20.10.6:5083/api/auth/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user),
+            });
+
+            if (response.ok) {
+                alert("Account created! You can now log in.");
+                navigation.replace("MainTabs")
+            } else {
+                const error = await response.text();
+                alert(error);
+            }
+        } catch (err) {
+            alert("Network error")
+        }
+    };
 
     const handleLogIn = () => {
         navigation.replace("Login")
