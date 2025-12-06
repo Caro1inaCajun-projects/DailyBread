@@ -1,7 +1,7 @@
 # DailyBread App
 Frontend: React + Typescript 
-\nBackend: ASP.NET Core Web API
-\nDatabase: PostgreSQL  
+Backend: ASP.NET Core Web API
+Database: PostgreSQL  
 
 ## Setup
 - Run `npm install && npm start` for frontend
