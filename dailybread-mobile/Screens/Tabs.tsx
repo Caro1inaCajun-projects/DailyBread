@@ -1,9 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from './Screens/HomeScreen';
-import CategoryScreen from './Screens/CategoryScreen';
-import ProfileScreen from './Screens/ProfileScreen';
+import HomeScreen from './HomeScreen';
+import CategoryScreen from './CategoryScreen';
+import ProfileScreen from './ProfileScreen';
+import WeeklyScreen from './WeeklyScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,10 +13,12 @@ export default function Tabs() {
         <Tab.Navigator
             screenOptions={{
                 headerShown: false,
-                tabBarActiveTintColor: 'blue',
-                tabBarStyle: { backgroundColor: '#000' },
+                tabBarActiveTintColor: '#EFE3C6',
+                tabBarInactiveTintColor: '#0A0A0A',
+                tabBarStyle: { position: 'absolute', backgroundColor: '#2E7D32', height: 80, borderTopWidth: 0, },
             }}
         >
+            <Tab.Screen name="Week" component={WeeklyScreen } />
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Categories" component={CategoryScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />

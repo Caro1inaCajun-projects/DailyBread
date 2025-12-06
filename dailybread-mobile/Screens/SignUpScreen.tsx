@@ -35,7 +35,7 @@ export default function SignUpScreen({ navigation }: any) {
             <Pressable style={styles.logInButton} onPress={handleLogIn}>
                 <Text style={styles.logInButtonText}>Log in</Text>
             </Pressable>
-            <Image source={require("../assets/daily-bread-logo.png")} style={styles.logo} />
+            <Image source={require("../assets/Daily-Bread.png")} style={styles.logo} />
             <Text style={styles.title}>Sign Up</Text>
 
             <FloatingLabelInput
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         fontSize: 32,
         marginTop: 45,
         marginBottom: 40,
-        color: "#2E7D32",
+        color: "#0A0A0A",
         fontWeight: "bold",
 
     },
