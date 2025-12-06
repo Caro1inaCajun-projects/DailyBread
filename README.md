@@ -1,6 +1,6 @@
 # DailyBread App
-Frontend: React + Tailwind  
-Backend: .NET 8 API  
+Frontend: React + Typescript 
+Backend: ASP.NET Core Web API
 Database: PostgreSQL  
 
 ## Setup
