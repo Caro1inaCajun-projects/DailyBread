@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold }
+    from "@expo-google-fonts/inter";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import LoginScreen from './Screens/LoginScreen';
@@ -9,6 +11,12 @@ import SignUpScreen from './Screens/SignUpScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+    const [fontsLoaded] = useFonts({
+        Inter_400Regular,
+        Inter_600SemiBold,
+        Inter_700Bold,
+    });
+
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>

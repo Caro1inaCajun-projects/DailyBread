@@ -21,7 +21,7 @@ export default function LoginScreen({ navigation }: any) {
             <Pressable style={styles.signUpButton} onPress={handleSignUp}>
                 <Text style={styles.signUpButtonText }>Sign Up</Text>
             </Pressable>
-            <Image source={require("../assets/daily-bread-logo.png")} style={styles.logo} />
+            <Image source={require("../assets/Daily-Bread.png")} style={styles.logo} />
 
             <Text style={styles.title}>Log in</Text>
 
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         fontSize: 32,
         marginTop: 45,
         marginBottom: 40,
-        color: "#2E7D32",
+        color: "#0A0A0A",
         fontWeight: "bold",
 
     },
