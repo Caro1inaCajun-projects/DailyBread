@@ -26,7 +26,13 @@ export const Api = {
     signup: (email: string, password: string, userName: string) =>
         apiRequest<{ message: string }>("api/auth/signup", {
             method: "POST",
-            body: JSON.stringify({ email, password, userName }),
+            body: JSON.stringify({ email,PasswordHash: password, userName }),
 
+        }),
+
+    login: (email: string, password: string) =>
+        apiRequest<{ message: string }>("api/auth/login", {
+            method: "POST",
+            body: JSON.stringify({ email,PasswordHash: password }),
         }),
 };

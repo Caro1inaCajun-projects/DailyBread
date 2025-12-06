@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, Alert } from 'react-native';
 import FloatingLabelInput from "./FloatingLabelInput";
+import { Api } from "./../apiClient";
 
 export default function LoginScreen({ navigation }: any) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleLogIn = () => {
-        navigation.replace("MainTabs");
+    const handleLogIn = async () => {
+        if (!email || !password) {
+            Alert.alert("Error","Please enter both email and password");
+            return;
+        }
+        try {
+            const response = await Api.login(email, password);
+            navigation.replace("MainTabs")
+        } catch (err: any) {
+            Alert.alert("Login Failed", err.message || "Network error")
+        }
     }
 
     const handleSignUp = () => {

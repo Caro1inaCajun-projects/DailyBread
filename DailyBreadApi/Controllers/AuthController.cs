@@ -39,7 +39,7 @@ namespace DailyBreadApi.Controllers
             var user = new User
             {
                 Email = request.Email,
-                PasswordHash = request.Password,
+                PasswordHash = request.PasswordHash,
                 UserName = request.UserName,
             };
 
@@ -49,10 +49,27 @@ namespace DailyBreadApi.Controllers
             return Ok(new { message = "User created." });
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto request)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            
+            if (user == null || user.PasswordHash != request.PasswordHash)
+                return BadRequest(new { message = "Invalid email or password" });
+
+            return Ok(new { message = "Login successful" });
+        }
+
+
+        public class LoginDto
+        {
+            public string Email { get; set; }
+            public string PasswordHash { get; set; }
+        }
         public class SignUpDto
         {
             public string Email { get; set; }
-            public string Password { get; set; }
+            public string PasswordHash { get; set; }
             public string UserName { get; set; }
         }
     }
