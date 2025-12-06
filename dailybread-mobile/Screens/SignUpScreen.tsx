@@ -17,7 +17,9 @@ export default function SignUpScreen({ navigation }: any) {
         };
 
         try {
-            const response = await fetch("http://172.20.10.6:5083/api/auth/signup", {
+
+            //create a ngrok tunnel and replace the url with what ever is produced when running npx ngrok http 5083
+            const response = await fetch("https://lactic-carter-rosily.ngrok-free.dev/api/auth/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
