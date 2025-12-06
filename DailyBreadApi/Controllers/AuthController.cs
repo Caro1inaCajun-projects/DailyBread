@@ -31,7 +31,7 @@ namespace DailyBreadApi.Controllers
 
             if (existingUser != null)
             {
-                return BadRequest("Email already in use.");
+                return BadRequest(new { message = "Email already in use." });
 
             }
 
@@ -46,7 +46,7 @@ namespace DailyBreadApi.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok("User created.");
+            return Ok(new { message = "User created." });
         }
 
         public class SignUpDto

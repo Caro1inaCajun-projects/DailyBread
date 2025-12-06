@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import FloatingLabelInput from "./FloatingLabelInput";
+import { Api } from "./../apiClient";
 
 
 export default function SignUpScreen({ navigation }: any) {
@@ -17,25 +18,11 @@ export default function SignUpScreen({ navigation }: any) {
         };
 
         try {
-
-            //create a ngrok tunnel and replace the url with what ever is produced when running npx ngrok http 5083
-            const response = await fetch("https://lactic-carter-rosily.ngrok-free.dev/api/auth/signup", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(user),
-            });
-
-            if (response.ok) {
-                alert("Account created! You can now log in.");
-                navigation.replace("MainTabs")
-            } else {
-                const error = await response.text();
-                alert(error);
-            }
-        } catch (err) {
-            alert("Network error")
+            await Api.signup(email, password, name);
+            alert("Account created! You can now log in.");
+            navigation.replace("MainTabs");
+        } catch (err: any) {
+            alert(err.message || "Network error");
         }
     };
 
