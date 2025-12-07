@@ -19,7 +19,6 @@ export default function SignUpScreen({ navigation }: any) {
 
         try {
             await Api.signup(email, password, name);
-            alert("Account created! You can now log in.");
             navigation.replace("MainTabs");
         } catch (err: any) {
             alert(err.message || "Network error");
