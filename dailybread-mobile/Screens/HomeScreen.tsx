@@ -1,23 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
 import colors from '../Styles/colors';
-import habits, { Habit } from '../Data/habits';
 
 export default function HomeScreen({ navigation }: any) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Daily Bread</Text>
 
-            <FlatList
-                data={habits}
-                keyExtractor={(item: Habit) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <View style={styles.habitItem}>
-
-                        <Text style={styles.category}>{item.category}</Text>
-                    </View>
-                )}
-            />
+            
             <Button title="Go to Categories" color={colors.green} onPress={() => navigation.navigate('Categories')} />
             <Button title="Go to Profile" color={colors.green} onPress={() => navigation.navigate('Profile')} />
         </View>

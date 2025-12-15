@@ -5,6 +5,7 @@ import HomeScreen from './HomeScreen';
 import CategoryScreen from './CategoryScreen';
 import ProfileScreen from './ProfileScreen';
 import WeeklyScreen from './WeeklyScreen';
+import HabitSelection from './HabitSelection';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,6 +22,7 @@ export default function Tabs() {
             <Tab.Screen name="Week" component={WeeklyScreen } />
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Categories" component={CategoryScreen} />
+            <Tab.Screen name="Habits" component={HabitSelection } />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
     );
