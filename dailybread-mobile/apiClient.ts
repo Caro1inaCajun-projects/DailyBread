@@ -1,4 +1,5 @@
-
+ 
+import { PresetHabit } from "./Types/PresetHabit";
 
 
 //create a ngrok tunnel and replace the url with what ever is produced when running npx ngrok http 5083
@@ -34,5 +35,10 @@ export const Api = {
         apiRequest<{ message: string }>("api/auth/login", {
             method: "POST",
             body: JSON.stringify({ email,PasswordHash: password }),
+        }),
+
+    getAllPresetHabits: () =>
+        apiRequest<PresetHabit[]>("api/PresetHabit", {
+            method: "GET",
         }),
 };

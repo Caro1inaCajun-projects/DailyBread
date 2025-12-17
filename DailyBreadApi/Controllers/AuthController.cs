@@ -41,6 +41,8 @@ namespace DailyBreadApi.Controllers
                 Email = request.Email,
                 PasswordHash = request.PasswordHash,
                 UserName = request.UserName,
+                XP = 0,
+                Level = 1
             };
 
             _context.Users.Add(user);

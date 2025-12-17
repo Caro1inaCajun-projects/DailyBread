@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Image, Alert } from 'react-native';
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, View, Text, StyleSheet, Pressable, Image, Alert } from 'react-native';
 import FloatingLabelInput from "./FloatingLabelInput";
 import { Api } from "./../apiClient";
 
@@ -27,12 +27,18 @@ export default function LoginScreen({ navigation }: any) {
 
 
     return (
+        <KeyboardAvoidingView
+            style={{
+                flex: 1, backgroundColor: "#EFE3C6"}}
+            behavior={Platform.OS ==="ios" ? "padding":"height" }
+        >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
             <Pressable style={styles.signUpButton} onPress={handleSignUp}>
                 <Text style={styles.signUpButtonText }>Sign Up</Text>
             </Pressable>
             <Image source={require("../assets/Daily-Bread.png")} style={styles.logo} />
-
+            <Text style={styles.logoText}>Daily Bread</Text>
             <Text style={styles.title}>Log in</Text>
 
             <FloatingLabelInput
@@ -57,18 +63,20 @@ export default function LoginScreen({ navigation }: any) {
                 <Text style={styles.forgotPassButtonText}>Forgot Password?</Text>
             </Pressable>
 
-        </View>
+                </View>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#EFE3C6",
         padding: 25,
+        justifyContent: 'center'
     },
     title: {
-        fontSize: 32,
+        fontSize: 28,
         marginTop: 45,
         marginBottom: 40,
         color: "#0A0A0A",
@@ -76,10 +84,19 @@ const styles = StyleSheet.create({
 
     },
     logo: {
-        width: 200,
+        width: 274,
         height: 200,
-        resizeMode: "contain",
+        marginTop: 15,
         alignSelf: "center",
+    },
+    logoText: {
+        fontFamily: "Lato",
+
+        fontSize: 65,
+        textAlign: "center",
+        color: "#2E7D32",
+        fontWeight: "bold",
+        marginBottom: 15,
     },
     logInButton: {
         marginTop: 15,
@@ -95,10 +112,7 @@ const styles = StyleSheet.create({
         color: "#EFE3C6",
     },
     signUpButton: {
-        marginTop: 25,
         alignSelf: 'flex-end',
-        justifyContent: 'flex-end'
-
     },
     signUpButtonText: {
         color: "#878472"
