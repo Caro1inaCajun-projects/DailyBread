@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, View, Text, StyleSheet, Pressable, Image, ScrollView } from 'react-native';
 import FloatingLabelInput from "./FloatingLabelInput";
 import { Api } from "./../apiClient";
 
@@ -30,13 +30,18 @@ export default function SignUpScreen({ navigation }: any) {
     }
 
     return (
+        <KeyboardAvoidingView
+            style={{ flex: 1, backgroundColor: "#EFE3C6" }}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
             <Pressable style={styles.logInButton} onPress={handleLogIn}>
                 <Text style={styles.logInButtonText}>Log in</Text>
             </Pressable>
-            <Image source={require("../assets/Daily-Bread.png")} style={styles.logo} />
+                    <Image source={require("../assets/Daily-Bread.png")} style={styles.logo} />
+                    <Text style={styles.logoText}>Daily Bread</Text>
             <Text style={styles.title}>Sign Up</Text>
-
             <FloatingLabelInput
                 placeholder="Email"
                 value={email}
@@ -54,14 +59,16 @@ export default function SignUpScreen({ navigation }: any) {
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry={true}
-            />
+                        />
 
             <Pressable style={styles.signUpButton} onPress={handleSignUp}>
                 <Text style={styles.signUpButtonText}>Sign Up</Text>
             </Pressable>
 
 
-        </View>
+                    </View>
+                </TouchableWithoutFeedback>
+                </KeyboardAvoidingView>
     );
 
 
@@ -70,8 +77,9 @@ export default function SignUpScreen({ navigation }: any) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#EFE3C6",
         padding: 25,
+        justifyContent: 'center'
+
     },
     title: {
         fontSize: 32,
@@ -104,10 +112,19 @@ const styles = StyleSheet.create({
         color: "#878472"
     },
     logo: {
-        width: 200,
+        width: 274,
         height: 200,
-        resizeMode: "contain",
+        marginTop: 15,
         alignSelf: "center",
+    },
+    logoText: {
+        fontFamily: "Lato",
+
+        fontSize: 65,
+        textAlign: "center",
+        color: "#2E7D32",
+        fontWeight: "bold",
+        marginBottom: 15,
     },
 
 });

@@ -24,8 +24,7 @@ namespace DailyBreadApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PresetHabit>>> GetAll()
         {
-            var habits = await _context.PresetHabits.ToListAsync();
-            return Ok(habits);
+            return Ok(await _context.PresetHabits.ToListAsync());
         }
         
 

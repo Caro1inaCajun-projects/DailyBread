@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, TextInput, Animated, StyleSheet } from "react-native";
 
 
-//This is the FloatingLableInput Interface. All of these fields are required to have a FloatingLabelInput Textbox. All except secureTextEntry this is optional but if true it creates a hidden text for things like passwords.
 interface FloatingLabelInputProps {
     placeholder: string;
     value: string;
@@ -34,11 +33,11 @@ export default function FloatingLabelInput({
         left: 0,
         top: animatedIsFocused.interpolate({
             inputRange: [0, 1],
-            outputRange: [18, -8], // moves label up
+            outputRange: [20, 4],
         }),
         fontSize: animatedIsFocused.interpolate({
             inputRange: [0, 1],
-            outputRange: [18, 14], // smaller font when floating
+            outputRange: [18, 14],
         }),
         color: "#878472",
     };
@@ -56,7 +55,6 @@ export default function FloatingLabelInput({
                 placeholder=""
                 placeholderTextColor="transparent"
             />
-            <View/>
         </View>
     );
 }
@@ -64,13 +62,14 @@ export default function FloatingLabelInput({
 const styles = StyleSheet.create({
     contain: {
         width: "100%",
+        height: 56,
+        marginBottom: 32,
         paddingVertical: 10,
     },
     input: {
         width: "100%",
         borderColor: "#0A0A0A",
         borderBottomWidth: 2,
-        marginBottom: 24,
         paddingVertical: 10,
         fontSize: 16,
     },

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Image, Alert } from 'react-native';
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, View, Text, StyleSheet, Pressable, Image, Alert } from 'react-native';
 import FloatingLabelInput from "./FloatingLabelInput";
 import { Api } from "./../apiClient";
 
@@ -27,6 +27,12 @@ export default function LoginScreen({ navigation }: any) {
 
 
     return (
+        <KeyboardAvoidingView
+            style={{
+                flex: 1, backgroundColor: "#EFE3C6"}}
+            behavior={Platform.OS ==="ios" ? "padding":"height" }
+        >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
             <Pressable style={styles.signUpButton} onPress={handleSignUp}>
                 <Text style={styles.signUpButtonText }>Sign Up</Text>
@@ -57,14 +63,15 @@ export default function LoginScreen({ navigation }: any) {
                 <Text style={styles.forgotPassButtonText}>Forgot Password?</Text>
             </Pressable>
 
-        </View>
+                </View>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#EFE3C6",
         padding: 25,
         justifyContent: 'center'
     },

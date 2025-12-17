@@ -38,7 +38,7 @@ export const Api = {
         }),
 
     getAllPresetHabits: () =>
-        apiRequest<PresetHabit[]>("api/presthabits", {
+        apiRequest<PresetHabit[]>("api/PresetHabit", {
             method: "GET",
         }),
 };
