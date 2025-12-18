@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, View, Text, StyleSheet, Pressable, Image, ScrollView } from 'react-native';
 import FloatingLabelInput from "./FloatingLabelInput";
 import { Api } from "./../apiClient";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function SignUpScreen({ navigation }: any) {
@@ -18,7 +19,8 @@ export default function SignUpScreen({ navigation }: any) {
         };
 
         try {
-            await Api.signup(email, password, name);
+            const response = await Api.signup(email, password, name);
+            await AsyncStorage.setItem('token', response.token);
             navigation.replace("MainTabs");
         } catch (err: any) {
             alert(err.message || "Network error");
