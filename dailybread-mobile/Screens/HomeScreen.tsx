@@ -15,12 +15,15 @@ export default function HomeScreen() {
         try {
             const allHabits = await Api.getAllPresetHabits();
             const userHabitIds = await Api.getUserHabits();
-
+            const completedHabits = await Api.getCompletedHabits();
             const selectedHabits = allHabits.filter(habit =>
                 userHabitIds.includes(habit.id)
             );
-
+            
+            setCompletedHabits(completedHabits)
             setHabits(selectedHabits);
+            
+
         } catch (err) {
             console.error("Error loading daily habits:", err);
         } finally {
@@ -35,12 +38,24 @@ export default function HomeScreen() {
         }, [])
     );
 
-    const toggleCompleted = (habitId: number) => {
+    const toggleCompleted = async (habitId: number) => {
         setCompletedHabits(prev =>
             prev.includes(habitId)
                 ? prev.filter(id => id !== habitId)
                 : [...prev, habitId]
         );
+
+        try {
+            await Api.toggleCompletedHabit(habitId);
+        } catch (err) {
+            console.error("Failed to toggle habit:", err);
+
+            setCompletedHabits(prev =>
+                prev.includes(habitId)
+                    ? prev.filter(id => id !== habitId)
+                    : [...prev, habitId]
+            );
+        }
     };
 
     if (loading) {
@@ -54,7 +69,7 @@ export default function HomeScreen() {
     return (
         <View style={styles.screen}>
             <View style={styles.header}>
-                <Text style={styles.headerTitle}>Today’s Disciplines</Text>
+                <Text style={styles.headerTitle}>Today{"'"}s Disciplines</Text>
             </View>
 
             <ScrollView style={styles.scrollableContainer}>

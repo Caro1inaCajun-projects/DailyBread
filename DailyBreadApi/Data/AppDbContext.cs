@@ -10,6 +10,7 @@ namespace DailyBreadApi.Data
         public DbSet<User> Users { get; set; }
         public DbSet<PresetHabit> PresetHabits { get; set; }
         public DbSet<UserHabit> UserHabits { get; set; }
+        public DbSet<CompletedHabit> CompletedHabits { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

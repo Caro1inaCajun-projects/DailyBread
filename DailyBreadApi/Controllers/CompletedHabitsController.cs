@@ -1,31 +1,33 @@
 ﻿using DailyBreadApi.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using DailyBreadApi.Models;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace DailyBreadApi.Controllers
 {
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class UserHabitsController : ControllerBase
+    public class CompletedHabitsController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public UserHabitsController(AppDbContext context)
+        public CompletedHabitsController(AppDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<int>>> GetUserHabits()
+        public async Task<ActionResult<List<int>>> GetCompletedHabits()
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var habitIds = await _context.UserHabits
-                .Where(uh => uh.UserId == userId)
-                .Select(uh => uh.HabitId)
+            var today = DateOnly.FromDateTime(DateTime.UtcNow);
+            var habitIds = await _context.CompletedHabits
+                .Where(ch => ch.UserId == userId && ch.CompletedDate == today)
+                .Select(ch => ch.HabitId)
                 .ToListAsync();
 
             return Ok(habitIds);
@@ -35,21 +37,22 @@ namespace DailyBreadApi.Controllers
         public async Task<IActionResult> ToggleHabit(int habitId)
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var today = DateOnly.FromDateTime(DateTime.UtcNow);
 
-            var existing = await _context.UserHabits
-                .FirstOrDefaultAsync(uh => uh.UserId == userId && uh.HabitId == habitId);
+            var existing = await _context.CompletedHabits
+                .FirstOrDefaultAsync(ch => ch.UserId == userId && ch.HabitId == habitId && ch.CompletedDate == today);
 
             if (existing != null)
             {
-                _context.UserHabits.Remove(existing);
-
+                _context.CompletedHabits.Remove(existing);
             }
             else
             {
-                _context.UserHabits.Add(new UserHabit
+                _context.CompletedHabits.Add(new CompletedHabit
                 {
                     UserId = userId,
-                    HabitId = habitId
+                    HabitId = habitId,
+                    CompletedDate = today,
                 });
             }
 
@@ -57,5 +60,4 @@ namespace DailyBreadApi.Controllers
             return NoContent();
         }
     }
-    
 }

@@ -60,4 +60,14 @@ export const Api = {
         apiRequest<void>(`api/UserHabits/toggle/${habitId}`, {
             method: "POST",
         }),
+
+    getCompletedHabits: () =>
+        apiRequest<number[]>("api/CompletedHabits", {
+            method: "GET",
+        }),
+
+    toggleCompletedHabit: (habitId: number) =>
+        apiRequest<void>(`api/CompletedHabits/toggle/${habitId}`, {
+            method: "POST",
+        }),
 };
