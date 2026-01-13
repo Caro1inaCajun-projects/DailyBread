@@ -9,6 +9,8 @@ namespace DailyBreadApi.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<PresetHabit> PresetHabits { get; set; }
+        public DbSet<UserHabit> UserHabits { get; set; }
+        public DbSet<CompletedHabit> CompletedHabits { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +45,22 @@ namespace DailyBreadApi.Data
                     new PresetHabit { id = 26, title = "Bedtime", description = "Go to bed by a set time", icon = "none" },
                     new PresetHabit { id = 27, title = "Wake Up", description = "Wake up by a set time", icon = "none" }
                 );
+
+            modelBuilder.Entity<UserHabit>()
+            .HasIndex(uh => new { uh.UserId, uh.HabitId })
+            .IsUnique();
+
+            modelBuilder.Entity<UserHabit>()
+                .HasOne(uh => uh.User)
+                .WithMany(u => u.UserHabits)
+                .HasForeignKey(uh => uh.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserHabit>()
+                .HasOne(uh => uh.PresetHabit)
+                .WithMany(h => h.UserHabits)
+                .HasForeignKey(uh => uh.HabitId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

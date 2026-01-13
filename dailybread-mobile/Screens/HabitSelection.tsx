@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { View, Pressable, StyleSheet, ScrollView, Text } from 'react-native';
-import colors from '../Styles/colors';
 import { Api } from "./../apiClient";
 import { PresetHabit } from "../Types/PresetHabit";
 
+
 export default function HabitSelection() {
     const [habits, setHabits] = useState<PresetHabit[]>([]);
-    const [selectedHabits, setSelectedHabits] = useState<Set<number>>(new Set());
+    const [selectedHabits, setSelectedHabitsIds] = useState<number[]>([]);
     const [loading, setLoading] = useState(true);
 
-    const toggleHabit = (habitId: number) => {
-        setSelectedHabits(prev => {
-            const next = new Set(prev);
-            if (next.has(habitId)) {
-                next.delete(habitId);
-            } else {
-                next.add(habitId);
-            }
-            return next;
-        });
+    const toggleHabit = async (habitId: number) => {
+        try {
+            await Api.toggleUserHabit(habitId);
+
+            setSelectedHabitsIds(prev =>
+                prev.includes(habitId)
+                    ? prev.filter(id => id !== habitId)
+                    : [...prev, habitId]
+            );
+        }
+        catch (err) {
+            console.error("Error toggling habit:", err);
+        }
     };
 
     useEffect(() => {
@@ -26,6 +29,9 @@ export default function HabitSelection() {
             try {
                 const data = await Api.getAllPresetHabits();
                 setHabits(data);
+
+                const userHabitIds = await Api.getUserHabits();
+                setSelectedHabitsIds(userHabitIds);
             }
             catch (err) {
                 console.error("Error loading habits:", err);
@@ -50,7 +56,7 @@ export default function HabitSelection() {
             </View>
             <ScrollView style={styles.scrollableContainer}>
                 {habits.map((habit) => {
-                    const isSelected = selectedHabits.has(habit.id);
+                    const isSelected = selectedHabits.includes(habit.id);
 
                     return (
                         <Pressable

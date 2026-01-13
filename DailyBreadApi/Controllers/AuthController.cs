@@ -14,6 +14,30 @@ namespace DailyBreadApi.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
+
+        private string GenerateJwtToken(User user)
+        {
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+            };
+
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_config["Jwt:Key"])
+                );
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddDays(7),
+                    signingCredentials: creds
+                );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
         private readonly AppDbContext _context;
         private readonly IConfiguration _config;
 
@@ -48,7 +72,9 @@ namespace DailyBreadApi.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "User created." });
+            var token = GenerateJwtToken(user);
+
+            return Ok(new { token });
         }
 
         [HttpPost("login")]
@@ -59,7 +85,9 @@ namespace DailyBreadApi.Controllers
             if (user == null || user.PasswordHash != request.PasswordHash)
                 return BadRequest(new { message = "Invalid email or password" });
 
-            return Ok(new { message = "Login successful" });
+            var token = GenerateJwtToken(user);
+
+            return Ok(new { token });
         }
 
 

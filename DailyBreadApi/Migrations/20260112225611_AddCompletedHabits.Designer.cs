@@ -3,6 +3,7 @@ using System;
 using DailyBreadApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DailyBreadApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260112225611_AddCompletedHabits")]
+    partial class AddCompletedHabits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,10 +39,17 @@ namespace DailyBreadApi.Migrations
                     b.Property<int>("HabitId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("PresetHabitid")
+                        .HasColumnType("integer");
+
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PresetHabitid");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CompletedHabits");
                 });
@@ -313,6 +323,25 @@ namespace DailyBreadApi.Migrations
                         .IsUnique();
 
                     b.ToTable("UserHabits");
+                });
+
+            modelBuilder.Entity("DailyBreadApi.Models.CompletedHabit", b =>
+                {
+                    b.HasOne("DailyBreadApi.Models.PresetHabit", "PresetHabit")
+                        .WithMany()
+                        .HasForeignKey("PresetHabitid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DailyBreadApi.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PresetHabit");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DailyBreadApi.Models.UserHabit", b =>

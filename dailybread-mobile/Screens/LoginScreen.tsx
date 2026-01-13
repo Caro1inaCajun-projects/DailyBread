@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, View, Text, StyleSheet, Pressable, Image, Alert } from 'react-native';
 import FloatingLabelInput from "./FloatingLabelInput";
 import { Api } from "./../apiClient";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen({ navigation }: any) {
 
@@ -15,6 +16,7 @@ export default function LoginScreen({ navigation }: any) {
         }
         try {
             const response = await Api.login(email, password);
+            await AsyncStorage.setItem('token', response.token);
             navigation.replace("MainTabs")
         } catch (err: any) {
             Alert.alert("Login Failed", err.message || "Network error")
