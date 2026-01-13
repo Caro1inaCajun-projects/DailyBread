@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DailyBreadApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251126144225_InitialCreate")]
+    [Migration("20251210183535_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,29 +24,29 @@ namespace DailyBreadApi.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("DailyBreadApi.Models.Habit", b =>
+            modelBuilder.Entity("DailyBreadApi.Models.PresetHabit", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<int>("FrequencyPerWeek")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Title")
+                    b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<string>("icon")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.HasIndex("UserId");
+                    b.HasKey("id");
 
-                    b.ToTable("Habits");
+                    b.ToTable("PresetHabits");
                 });
 
             modelBuilder.Entity("DailyBreadApi.Models.User", b =>
@@ -68,23 +68,16 @@ namespace DailyBreadApi.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("XP")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("DailyBreadApi.Models.Habit", b =>
-                {
-                    b.HasOne("DailyBreadApi.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
