@@ -1,5 +1,5 @@
 # DailyBread App
-![.NET CI](https://github.com/CarolinaCajun-projects/DailyBread/actions/workflows/ci.yml/badge.svg)\n
+![.NET CI](https://github.com/CarolinaCajun-projects/DailyBread/actions/workflows/ci.yml/badge.svg) \n
 
 Frontend: React + Typescript 
 Backend: ASP.NET Core Web API
