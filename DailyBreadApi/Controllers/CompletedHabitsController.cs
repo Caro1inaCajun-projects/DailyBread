@@ -1,9 +1,7 @@
-﻿using DailyBreadApi.Data;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using DailyBreadApi.Models;
-using Microsoft.EntityFrameworkCore;
+using DailyBreadApi.Services;
 
 
 namespace DailyBreadApi.Controllers
@@ -13,11 +11,11 @@ namespace DailyBreadApi.Controllers
     [Route("api/[controller]")]
     public class CompletedHabitsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly CompletedHabitService _completedHabitService;
 
-        public CompletedHabitsController(AppDbContext context)
+        public CompletedHabitsController(CompletedHabitService completedHabitService)
         {
-            _context = context;
+            _completedHabitService = completedHabitService;
         }
 
         [HttpGet]
@@ -25,11 +23,8 @@ namespace DailyBreadApi.Controllers
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var today = DateOnly.FromDateTime(DateTime.UtcNow);
-            var habitIds = await _context.CompletedHabits
-                .Where(ch => ch.UserId == userId && ch.CompletedDate == today)
-                .Select(ch => ch.HabitId)
-                .ToListAsync();
 
+            var habitIds = await _completedHabitService.GetCompletedHabitsAsync(userId, today);
             return Ok(habitIds);
         }
 
@@ -39,24 +34,7 @@ namespace DailyBreadApi.Controllers
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var today = DateOnly.FromDateTime(DateTime.UtcNow);
 
-            var existing = await _context.CompletedHabits
-                .FirstOrDefaultAsync(ch => ch.UserId == userId && ch.HabitId == habitId && ch.CompletedDate == today);
-
-            if (existing != null)
-            {
-                _context.CompletedHabits.Remove(existing);
-            }
-            else
-            {
-                _context.CompletedHabits.Add(new CompletedHabit
-                {
-                    UserId = userId,
-                    HabitId = habitId,
-                    CompletedDate = today,
-                });
-            }
-
-            await _context.SaveChangesAsync();
+            await _completedHabitService.ToggleHabitAsync(userId, habitId, today);
             return NoContent();
         }
     }
