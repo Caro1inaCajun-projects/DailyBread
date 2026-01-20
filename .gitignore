@@ -18,7 +18,8 @@ obj/
 *.user
 *.suo
 *.vs/
-appsettings.*.json       # ignore all appsettings files that may contain secrets
+appsettings.*.json   
+appsettings.json
 secrets.json
 *.db
 
