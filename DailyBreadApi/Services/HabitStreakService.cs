@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 
-namespace DailyBradApi.Services
+namespace DailyBreadApi.Services
 {
     public class HabitStreakService
     {
