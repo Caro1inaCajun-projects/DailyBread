@@ -15,7 +15,7 @@ namespace DailyBreadApi.Services
             var yesterday = today.AddDays(-1);
             var streak = 0;
 
-            if (completedDates is null)
+            if (completedDates is null || completedDates.Count() == 0)
             {
                 return 0;
             }

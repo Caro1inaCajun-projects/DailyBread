@@ -99,7 +99,7 @@ public class HabitStreakServiceTests
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
         var dates = new List<DateOnly> { today.AddDays(-3), today.AddDays(-4) };
 
-        var streak = services.StreakCalculator(dates);
+        var streak = service.StreakCalculator(dates);
 
         Assert.Equal(0, streak);
     }
