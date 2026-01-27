@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using DailyBreadApi.Models;
 using Microsoft.AspNetCore.Authorization;
-using DailyBreadApi.Services;
 
 namespace DailyBreadApi.Controllers
 {
@@ -13,19 +12,22 @@ namespace DailyBreadApi.Controllers
     [Route("api/[controller]")]
     public class UserHabitsController : ControllerBase
     {
-        private readonly UserHabitService _userHabitService;
+        private readonly AppDbContext _context;
 
-        public UserHabitsController(UserHabitService userHabitService)
+        public UserHabitsController(AppDbContext context)
         {
-            _userHabitService = userHabitService;
+            _context = context;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<int>>> GetUserHabits()
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var habitIds = await _context.UserHabits
+                .Where(uh => uh.UserId == userId)
+                .Select(uh => uh.HabitId)
+                .ToListAsync();
 
-            var habitIds = await _userHabitService.GetUserHabitIdsAsync(userId);
             return Ok(habitIds);
         }
 
@@ -34,7 +36,24 @@ namespace DailyBreadApi.Controllers
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            await _userHabitService.ToggleHabitAsync(userId, habitId);
+            var existing = await _context.UserHabits
+                .FirstOrDefaultAsync(uh => uh.UserId == userId && uh.HabitId == habitId);
+
+            if (existing != null)
+            {
+                _context.UserHabits.Remove(existing);
+
+            }
+            else
+            {
+                _context.UserHabits.Add(new UserHabit
+                {
+                    UserId = userId,
+                    HabitId = habitId
+                });
+            }
+
+            await _context.SaveChangesAsync();
             return NoContent();
         }
     }

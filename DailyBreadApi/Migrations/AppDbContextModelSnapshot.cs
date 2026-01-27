@@ -46,217 +46,217 @@ namespace DailyBreadApi.Migrations
 
             modelBuilder.Entity("DailyBreadApi.Models.PresetHabit", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Icon")
+                    b.Property<string>("icon")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("title")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("PresetHabits");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            Description = "Spend some time in prayer",
-                            Icon = "none",
-                            Title = "Pray"
+                            id = 1,
+                            description = "Spend some time in prayer",
+                            icon = "none",
+                            title = "Pray"
                         },
                         new
                         {
-                            Id = 2,
-                            Description = "Find a good devotional and commit to doing one a day",
-                            Icon = "none",
-                            Title = "Daily Devotional"
+                            id = 2,
+                            description = "Find a good devotional and commit to doing one a day",
+                            icon = "none",
+                            title = "Daily Devotional"
                         },
                         new
                         {
-                            Id = 3,
-                            Description = "Read one chapter out of the Bible",
-                            Icon = "none",
-                            Title = "A Chapter A Day"
+                            id = 3,
+                            description = "Read one chapter out of the Bible",
+                            icon = "none",
+                            title = "A Chapter A Day"
                         },
                         new
                         {
-                            Id = 4,
-                            Description = "Memorize one verse from anywhere in the bible",
-                            Icon = "none",
-                            Title = "Memorize A Verse"
+                            id = 4,
+                            description = "Memorize one verse from anywhere in the bible",
+                            icon = "none",
+                            title = "Memorize A Verse"
                         },
                         new
                         {
-                            Id = 5,
-                            Description = "Find a sermon to listen to",
-                            Icon = "none",
-                            Title = "Listen To A Sermon"
+                            id = 5,
+                            description = "Find a sermon to listen to",
+                            icon = "none",
+                            title = "Listen To A Sermon"
                         },
                         new
                         {
-                            Id = 6,
-                            Description = "Spend some time in worship whether through song or adoration in prayer",
-                            Icon = "none",
-                            Title = "Worship"
+                            id = 6,
+                            description = "Spend some time in worship whether through song or adoration in prayer",
+                            icon = "none",
+                            title = "Worship"
                         },
                         new
                         {
-                            Id = 7,
-                            Description = "Dedicate some time to fasting from someting (Food, Social Media, TV, etc.)",
-                            Icon = "none",
-                            Title = "Fast"
+                            id = 7,
+                            description = "Dedicate some time to fasting from someting (Food, Social Media, TV, etc.)",
+                            icon = "none",
+                            title = "Fast"
                         },
                         new
                         {
-                            Id = 8,
-                            Description = "Reflect on your relationship with God and journal what comes to mind",
-                            Icon = "none",
-                            Title = "Spiritual Journaling"
+                            id = 8,
+                            description = "Reflect on your relationship with God and journal what comes to mind",
+                            icon = "none",
+                            title = "Spiritual Journaling"
                         },
                         new
                         {
-                            Id = 9,
-                            Description = "Check in with a brother or sister in the faith about something you wish to be held acountable for",
-                            Icon = "none",
-                            Title = "Accountability"
+                            id = 9,
+                            description = "Check in with a brother or sister in the faith about something you wish to be held acountable for",
+                            icon = "none",
+                            title = "Accountability"
                         },
                         new
                         {
-                            Id = 10,
-                            Description = "Reach out to a brother or sister in the faith and lift them up with encouraging words",
-                            Icon = "none",
-                            Title = "Exhortation"
+                            id = 10,
+                            description = "Reach out to a brother or sister in the faith and lift them up with encouraging words",
+                            icon = "none",
+                            title = "Exhortation"
                         },
                         new
                         {
-                            Id = 11,
-                            Description = "Through a passage of scripture, a sermon, or a lecture take some notes",
-                            Icon = "none",
-                            Title = "Study Time"
+                            id = 11,
+                            description = "Through a passage of scripture, a sermon, or a lecture take some notes",
+                            icon = "none",
+                            title = "Study Time"
                         },
                         new
                         {
-                            Id = 12,
-                            Description = "Listen to an episode of a podcast",
-                            Icon = "none",
-                            Title = "Podcast"
+                            id = 12,
+                            description = "Listen to an episode of a podcast",
+                            icon = "none",
+                            title = "Podcast"
                         },
                         new
                         {
-                            Id = 13,
-                            Description = "Reflect on your life and journal what comes to mind",
-                            Icon = "none",
-                            Title = "Mental Health Journaling"
+                            id = 13,
+                            description = "Reflect on your life and journal what comes to mind",
+                            icon = "none",
+                            title = "Mental Health Journaling"
                         },
                         new
                         {
-                            Id = 14,
-                            Description = "Read one chapter of a book",
-                            Icon = "none",
-                            Title = "Read A Book"
+                            id = 14,
+                            description = "Read one chapter of a book",
+                            icon = "none",
+                            title = "Read A Book"
                         },
                         new
                         {
-                            Id = 15,
-                            Description = "List out what needs to get done today and cross off the list as you go about your day",
-                            Icon = "none",
-                            Title = "Create A To-Do List"
+                            id = 15,
+                            description = "List out what needs to get done today and cross off the list as you go about your day",
+                            icon = "none",
+                            title = "Create A To-Do List"
                         },
                         new
                         {
-                            Id = 16,
-                            Description = "Set at least one hour of your day as a time without your phone in sight",
-                            Icon = "none",
-                            Title = "No Phone"
+                            id = 16,
+                            description = "Set at least one hour of your day as a time without your phone in sight",
+                            icon = "none",
+                            title = "No Phone"
                         },
                         new
                         {
-                            Id = 17,
-                            Description = "Spend some time stretching or focusing your breathing",
-                            Icon = "none",
-                            Title = "Stretching + Breathing Exercises"
+                            id = 17,
+                            description = "Spend some time stretching or focusing your breathing",
+                            icon = "none",
+                            title = "Stretching + Breathing Exercises"
                         },
                         new
                         {
-                            Id = 18,
-                            Description = "Complete on brain puzzle (Sudoku, CrossWord, Wordle, etc.)",
-                            Icon = "none",
-                            Title = "Complete A Brain Puzzle"
+                            id = 18,
+                            description = "Complete on brain puzzle (Sudoku, CrossWord, Wordle, etc.)",
+                            icon = "none",
+                            title = "Complete A Brain Puzzle"
                         },
                         new
                         {
-                            Id = 19,
-                            Description = "Find something around your house or work to clean up",
-                            Icon = "none",
-                            Title = "Clean"
+                            id = 19,
+                            description = "Find something around your house or work to clean up",
+                            icon = "none",
+                            title = "Clean"
                         },
                         new
                         {
-                            Id = 20,
-                            Description = "Make your bed in the morning",
-                            Icon = "none",
-                            Title = "Make Your Bed"
+                            id = 20,
+                            description = "Make your bed in the morning",
+                            icon = "none",
+                            title = "Make Your Bed"
                         },
                         new
                         {
-                            Id = 21,
-                            Description = "Spend 15 minutes learning a new skill",
-                            Icon = "none",
-                            Title = "Learn Something New"
+                            id = 21,
+                            description = "Spend 15 minutes learning a new skill",
+                            icon = "none",
+                            title = "Learn Something New"
                         },
                         new
                         {
-                            Id = 22,
-                            Description = "Drink at least two bottles of water (1 Liter)",
-                            Icon = "none",
-                            Title = "Drink Water"
+                            id = 22,
+                            description = "Drink at least two bottles of water (1 Liter)",
+                            icon = "none",
+                            title = "Drink Water"
                         },
                         new
                         {
-                            Id = 23,
-                            Description = "Hit 3,000 steps",
-                            Icon = "none",
-                            Title = "Daily Steps"
+                            id = 23,
+                            description = "Hit 3,000 steps",
+                            icon = "none",
+                            title = "Daily Steps"
                         },
                         new
                         {
-                            Id = 24,
-                            Description = "Spend at least 30 minutes working out",
-                            Icon = "none",
-                            Title = "Workout"
+                            id = 24,
+                            description = "Spend at least 30 minutes working out",
+                            icon = "none",
+                            title = "Workout"
                         },
                         new
                         {
-                            Id = 25,
-                            Description = "Eat one healthy meal",
-                            Icon = "none",
-                            Title = "Eat Healthy"
+                            id = 25,
+                            description = "Eat one healthy meal",
+                            icon = "none",
+                            title = "Eat Healthy"
                         },
                         new
                         {
-                            Id = 26,
-                            Description = "Go to bed by a set time",
-                            Icon = "none",
-                            Title = "Bedtime"
+                            id = 26,
+                            description = "Go to bed by a set time",
+                            icon = "none",
+                            title = "Bedtime"
                         },
                         new
                         {
-                            Id = 27,
-                            Description = "Wake up by a set time",
-                            Icon = "none",
-                            Title = "Wake Up"
+                            id = 27,
+                            description = "Wake up by a set time",
+                            icon = "none",
+                            title = "Wake Up"
                         });
                 });
 

@@ -19,9 +19,11 @@ export default function Tabs() {
                 tabBarStyle: { position: 'absolute', backgroundColor: '#2E7D32', height: 80, borderTopWidth: 0, },
             }}
         >
+            <Tab.Screen name="Week" component={WeeklyScreen } />
             <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Categories" component={CategoryScreen} />
             <Tab.Screen name="Habits" component={HabitSelection } />
-
+            <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
     );
 }
