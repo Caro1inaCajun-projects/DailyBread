@@ -33,6 +33,11 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<HomeService>();
+builder.Services.AddScoped<UserHabitService>();
+builder.Services.AddScoped<PresetHabitService>();
+builder.Services.AddScoped<CompletedHabitService>();
+builder.Services.AddScoped<HabitStreakService>();
 
 var app = builder.Build();
 app.UseSwagger();

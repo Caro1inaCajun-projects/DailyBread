@@ -31,7 +31,12 @@ export default function HabitSelection() {
                 setHabits(data);
 
                 const userHabitIds = await Api.getUserHabits();
-                setSelectedHabitsIds(userHabitIds);
+                if (Array.isArray(userHabitIds)) {
+                    setSelectedHabitsIds(userHabitIds);
+                } else {
+                    console.warn("getUserHabits returned non-array:", userHabitIds);
+                    setSelectedHabitsIds([]);
+                }
             }
             catch (err) {
                 console.error("Error loading habits:", err);

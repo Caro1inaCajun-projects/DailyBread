@@ -21,6 +21,15 @@ namespace DailyBreadApi.Services
                 .ToListAsync();
         }
 
+        public async Task<List<DateOnly>> GetCompletedHabitsHistoryAsync(int userID, int habitId)
+        {
+            return await _context.CompletedHabits
+                .Where(ch => ch.UserId == userID && ch.HabitId == habitId)
+                .OrderByDescending(ch => ch.CompletedDate)
+                .Select(ch => ch.CompletedDate)
+                .ToListAsync();
+        }
+
         public async Task ToggleHabitAsync(int userId, int habitId, DateOnly date)
         {
             var existing = await _context.CompletedHabits
