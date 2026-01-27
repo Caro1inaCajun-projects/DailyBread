@@ -1,9 +1,12 @@
 using DailyBreadApi.Data;
+using DailyBreadApi.Migrations;
 using DailyBreadApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DailyBreadApi.Services;
-
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace DailyBreadApi.Controllers
 {
@@ -11,18 +14,17 @@ namespace DailyBreadApi.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class PresetHabitController : ControllerBase {
-        private readonly PresetHabitService _presetHabitService;
+        private readonly AppDbContext _context;
 
-        public PresetHabitController(PresetHabitService presetHabitService)
+        public PresetHabitController(AppDbContext context)
         {
-            _presetHabitService = presetHabitService;
+            _context = context;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PresetHabit>>> GetAll()
         {
-            var habits = await _presetHabitService.GetAllAsync();
-            return Ok(habits);
+            return Ok(await _context.PresetHabits.ToListAsync());
         }
         
 
