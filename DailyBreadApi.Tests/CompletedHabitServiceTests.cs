@@ -1,6 +1,7 @@
 using DailyBreadApi.Data;
 using DailyBreadApi.Services;
 using Microsoft.EntityFrameworkCore;
+using DailyBreadApi.Models;
 using Xunit;
 
 public class CompletedHabitServiceTests

@@ -1,31 +1,25 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import { Api } from "../apiClient";
-import { PresetHabit } from "../Types/PresetHabit";
 import { useFocusEffect } from "@react-navigation/native";
 
+type HomeHabit = {
+    habitId: number;
+    title: string;
+    isCompletedToday: boolean;
+    currentStreak: number;
+};
 
 export default function HomeScreen() {
-    const [habits, setHabits] = useState<PresetHabit[]>([]);
-    const [completedHabits, setCompletedHabits] = useState<number[]>([]);
+    const [habits, setHabits] = useState<HomeHabit[]>([]);
     const [loading, setLoading] = useState(true);
 
-
-    const loadUserHabits = async () => {
+    const loadHome = async () => {
         try {
-            const allHabits = await Api.getAllPresetHabits();
-            const userHabitIds = await Api.getUserHabits();
-            const completedHabits = await Api.getCompletedHabits();
-            const selectedHabits = allHabits.filter(habit =>
-                userHabitIds.includes(habit.id)
-            );
-            
-            setCompletedHabits(completedHabits)
-            setHabits(selectedHabits);
-            
-
+            const data = await Api.getHome();
+            setHabits(data);
         } catch (err) {
-            console.error("Error loading daily habits:", err);
+            console.error("Error loading home:", err);
         } finally {
             setLoading(false);
         }
@@ -34,27 +28,24 @@ export default function HomeScreen() {
     useFocusEffect(
         React.useCallback(() => {
             setLoading(true);
-            loadUserHabits();
+            loadHome();
         }, [])
     );
 
     const toggleCompleted = async (habitId: number) => {
-        setCompletedHabits(prev =>
-            prev.includes(habitId)
-                ? prev.filter(id => id !== habitId)
-                : [...prev, habitId]
+        setHabits(prev =>
+            prev.map(h =>
+                h.habitId === habitId
+                    ? { ...h, isCompletedToday: !h.isCompletedToday }
+                    : h
+            )
         );
 
         try {
             await Api.toggleCompletedHabit(habitId);
+            loadHome();
         } catch (err) {
             console.error("Failed to toggle habit:", err);
-
-            setCompletedHabits(prev =>
-                prev.includes(habitId)
-                    ? prev.filter(id => id !== habitId)
-                    : [...prev, habitId]
-            );
         }
     };
 
@@ -73,35 +64,37 @@ export default function HomeScreen() {
             </View>
 
             <ScrollView style={styles.scrollableContainer}>
-                {habits.map(habit => {
-                    const isCompleted = completedHabits.includes(habit.id);
-
-                    return (
-                        <Pressable
-                            key={habit.id}
-                            style={[
-                                styles.row,
-                                isCompleted && styles.rowCompleted,
-                            ]}
-                            onPress={() => toggleCompleted(habit.id)}
-                        >
+                {habits.map(habit => (
+                    <Pressable
+                        key={habit.habitId}
+                        style={[
+                            styles.row,
+                            habit.isCompletedToday && styles.rowCompleted,
+                        ]}
+                        onPress={() => toggleCompleted(habit.habitId)}
+                    >
+                        <View>
                             <Text
                                 style={[
                                     styles.title,
-                                    isCompleted && styles.titleCompleted,
+                                    habit.isCompletedToday && styles.titleCompleted,
                                 ]}
                             >
                                 {habit.title}
                             </Text>
 
-                            <View style={styles.checkbox}>
-                                {isCompleted && (
-                                    <Text style={styles.checkmark}>X</Text>
-                                )}
-                            </View>
-                        </Pressable>
-                    );
-                })}
+                            <Text style={styles.streak}>
+                                ?? {habit.currentStreak} day streak
+                            </Text>
+                        </View>
+
+                        <View style={styles.checkbox}>
+                            {habit.isCompletedToday && (
+                                <Text style={styles.checkmark}>X</Text>
+                            )}
+                        </View>
+                    </Pressable>
+                ))}
 
                 {habits.length === 0 && (
                     <Text style={styles.empty}>
@@ -186,4 +179,7 @@ export default function HomeScreen() {
             fontSize: 16,
             color: "#2E7D32",
         },
+        streak: {
+
+        }
     });
