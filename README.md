@@ -1,8 +1,6 @@
 # DailyBread App
-![.NET CI](https://github.com/CarolinaCajun-projects/DailyBread/actions/workflows/ci.yml/badge.svg)
-
-Frontend: React + Typescript 
-Backend: ASP.NET Core Web API
+Frontend: React + Tailwind  
+Backend: .NET 8 API  
 Database: PostgreSQL  
 
 ## Setup
