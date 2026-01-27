@@ -1,9 +1,3 @@
-using DailyBreadApi.Data;
-using DailyBreadApi.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
-
 namespace DailyBreadApi.Services
 {
     public class HabitStreakService

@@ -70,4 +70,9 @@ export const Api = {
         apiRequest<void>(`api/CompletedHabits/toggle/${habitId}`, {
             method: "POST",
         }),
+
+    getHome: () =>
+        apiRequest<any[]>("api/Home", {
+            method: "GET",
+        }),
 };
