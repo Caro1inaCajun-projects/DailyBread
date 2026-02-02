@@ -3,7 +3,7 @@ import { PresetHabit } from "./Types/PresetHabit";
 
 
 //create a ngrok tunnel and replace the url with what ever is produced when running npx ngrok http 5083
-const BASE_URL = "https://lactic-carter-rosily.ngrok-free.dev";
+const BASE_URL = process.env.EXPO_PUBLIC_API_URL!;
 
 export async function apiRequest<T>(
     endpoint: string,
@@ -36,14 +36,14 @@ export const Api = {
     signup: (email: string, password: string, userName: string) =>
         apiRequest<{ token: string }>("api/auth/signup", {
             method: "POST",
-            body: JSON.stringify({ email,PasswordHash: password, userName }),
+            body: JSON.stringify({ email, PasswordHash: password, userName }),
 
         }),
 
     login: (email: string, password: string) =>
         apiRequest<{ token: string }>("api/auth/login", {
             method: "POST",
-            body: JSON.stringify({ email,PasswordHash: password }),
+            body: JSON.stringify({ email, PasswordHash: password }),
         }),
 
     getAllPresetHabits: () =>
