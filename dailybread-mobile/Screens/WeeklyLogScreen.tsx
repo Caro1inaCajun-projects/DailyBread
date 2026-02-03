@@ -1,75 +1,66 @@
 import React from 'react';
-import { View, ImageBackground, Image, StyleSheet, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Text } from 'react-native';
+import { Calendar } from 'react-native-calendars';
 
 export default function TreeScreen() {
     return (
-        <View style={styles.container}>
-            <ImageBackground
-                source={require('../assets/tree-background.png')}
-                style={styles.background}
-                resizeMode="cover"
-            >
-                <Text style={styles.titleText}>Daily Bread</Text>
-                <Text style={styles.subTitleText}>12/1-12/7</Text>
-                <Text style={styles.weekText}>                  M     T     W     T     F     S     S     </Text>
-                <Image
-                    source={require('../assets/branch.png')}
-                    style={styles.branchImage}
-                />
-                <Image
-                    source={require('../assets/branch.png')}
-                    style={styles.branchImage}
-                />
-                <Image
-                    source={require('../assets/branch.png')}
-                    style={styles.branchImage}
-                />
-                <Image
-                    source={require('../assets/branch.png')}
-                    style={styles.branchImage}
-                />
-                <Image
-                    source={require('../assets/branch.png')}
-                    style={styles.branchImage}
-                />
-                <Image
-                    source={require('../assets/branch.png')}
-                    style={styles.branchImage}
-                />
-            </ImageBackground>
+        <View style={styles.screen}>
+            <View style={styles.header}>
+           
+                <Text style={styles.headerTitle}>Daily Bread</Text>
+                
+            </View>
+            <ScrollView style={styles.scrollableContainer}>
+                <View style={styles.sectionBorder}>
+                    <Text style={styles.weekTitle}>Current Week</Text>
+                    <Text style={styles.weekText}>S     M     T     W     T     F     S</Text>
+                </View>
+                <Calendar>
+                </Calendar>
+            </ScrollView>
+
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    screen: {
         flex: 1,
+        backgroundColor: "#EFE3C6",
     },
-    background: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+    header: {
+        paddingTop: 40,
+        paddingBottom: 16,
+        paddingHorizontal: 20,
+        backgroundColor: "#2E7D32",
     },
-    titleText: {
-        fontSize: 32,
-        marginTop: 45,
+    headerTitle: {
+        fontSize: 28,
+        fontWeight: "700",
         color: "#0A0A0A",
-        fontWeight: "bold",
+        textAlign: "center",
     },
-    subTitleText: {
+    scrollableContainer: {
+        padding: 16,
+        marginBottom: 80,
+    },
+    sectionBorder: {
+        borderWidth: 2,
+        borderColor: "black",
+        borderRadius: 6,
+        padding: 8,
+    },
+    weekTitle: {
         fontSize: 25,
-        marginTop: 10,
-        color: "#0A0A0A"
+        textAlign: "center",
+        color: "0A0A0A",
+        fontWeight: "500"
     },
     weekText: {
-        marginTop: 55,
         fontSize: 25,
-        alignSelf: 'flex-end',
-        fontWeight: 'bold',
-    },
-    branchImage: {
-        marginTop: 40,
-        width: 400,
-        height:50,
+        textAlign: "center",
+        color: "0A0A0A",
+        fontWeight: "700"
     }
+
 });

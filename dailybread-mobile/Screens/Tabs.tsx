@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
 import CategoryScreen from './CategoryScreen';
 import ProfileScreen from './ProfileScreen';
-import WeeklyScreen from './WeeklyScreen';
+import WeeklyLogScreen from './WeeklyLogScreen';
 import HabitSelection from './HabitSelection';
 
 const Tab = createBottomTabNavigator();
@@ -20,7 +20,8 @@ export default function Tabs() {
             }}
         >
             <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Habits" component={HabitSelection } />
+            <Tab.Screen name="Habits" component={HabitSelection} />
+            <Tab.Screen name="Log" component={WeeklyLogScreen}/>
 
         </Tab.Navigator>
     );
