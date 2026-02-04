@@ -149,6 +149,7 @@ export default function HomeScreen() {
         },
         titleCompleted: {
             color: "#EFE3C6",
+            textDecorationColor: "#0A0A0A",
             textDecorationLine: "line-through",
         },
         checkbox: {

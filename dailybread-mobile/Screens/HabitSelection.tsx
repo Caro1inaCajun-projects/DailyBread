@@ -98,7 +98,7 @@ export default function HabitSelection() {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: "#EFE3C6"
+        backgroundColor: "#E6D7B8"
     },
     scrollableContainer: {
         marginBottom: 75,
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     titleSelected: {
         fontSize: 20,
         fontWeight: "600",
-        color: "#EFE3C6",
+        color: "#E6D7B8",
     },
 
     descriptionUnselected: {
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     descriptionSelected: {
         marginTop: 4,
         fontSize: 14,
-        color: "#EFE3C6",
+        color: "#E6D7B8",
     },
     header: {
         paddingTop: 40,
