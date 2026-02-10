@@ -1,6 +1,18 @@
-import React from 'react';
+﻿import React from 'react';
 import { View, ScrollView, StyleSheet, Text } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+import CompletionRing from "./CompletionRing";
+
+
+const disciplinesToday = [
+    { id: 1, completed: true },
+    { id: 2, completed: true },
+    { id: 3, completed: false },
+    { id: 4, completed: true },
+];
+
+const total = disciplinesToday.length;
+const completed = disciplinesToday.filter(d => d.completed).length;
 
 export default function TreeScreen() {
     return (
@@ -12,7 +24,15 @@ export default function TreeScreen() {
             </View>
             <ScrollView style={styles.scrollableContainer}>
                 <View style={styles.sectionBorder}>
-                    <Text>"Today's completion"</Text>
+                    <Text style={{ fontSize: 20, fontWeight: "600", marginBottom: 12 }}>
+                        Today's Completion
+                    </Text>
+
+                    <CompletionRing completed={completed} total={total} />
+
+                    <Text style={{ marginTop: 12, textAlign: "center", color: "#2E7D32" }}>
+                        Keep going — finish strong today 💪
+                    </Text>
                 </View>
                 <View style={styles.sectionBorder}>
                     <Text style={styles.weekTitle}>Current Week</Text>

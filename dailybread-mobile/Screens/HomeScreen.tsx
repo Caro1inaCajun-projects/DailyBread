@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Pressable, Image } from "react-native";
 import { Api } from "../apiClient";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -60,7 +60,8 @@ export default function HomeScreen() {
     return (
         <View style={styles.screen}>
             <View style={styles.header}>
-                <Text style={styles.headerTitle}>Today{"'"}s Disciplines</Text>
+                <Image source={require("../assets/Daily Bread Inverted.png")} style={styles.logo} resizeMode="contain" />
+                <Text style={styles.headerTitle }>Today's Disciplines</Text>
             </View>
 
             <ScrollView style={styles.scrollableContainer}>
@@ -117,12 +118,15 @@ export default function HomeScreen() {
             paddingBottom: 16,
             paddingHorizontal: 20,
             backgroundColor: "#2E7D32",
+            flexDirection: "row"
         },
         headerTitle: {
             fontSize: 28,
             fontWeight: "700",
             color: "#0A0A0A",
             textAlign: "center",
+            alignSelf: "center",
+            paddingLeft: 15,
         },
         scrollableContainer: {
             padding: 16,
@@ -182,5 +186,10 @@ export default function HomeScreen() {
         },
         streak: {
 
-        }
+        },
+        logo: {
+            width: 65,
+            height: 55,
+            alignContent: "flex-start",
+        },
     });
